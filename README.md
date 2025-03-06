@@ -22,17 +22,15 @@ We've developed a user-friendly web application that acts as a central hub for C
 ### Technologies Used
 
 - *Languages used:* HTML, CSS, JavaScript
-- *Frameworks used:* (If Applicable, e.g., React, Angular, Vue.js. If not, remove this line)
-- *Libraries used:* (If Applicable, e.g., jQuery, Axios. If not, remove this line)
-- *Tools used:* Git, VS Code, (Any other relevant tools)
+- *Tools used:* Git, VS Code
 
 ### Implementation
 
 For Software:
 
 # Installation
-1.  Clone the repository: git clone [repository URL]
-2.  Navigate to the project directory: cd [project directory]
+1.  Clone the repository: git clone 
+2.  Navigate to the project directory: cd Cucekinfo
 3.  Open index.html in your web browser.
 
 # Run
