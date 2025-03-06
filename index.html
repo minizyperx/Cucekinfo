@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUCEK Quick Info</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> <h2 class="h2">CUCEK Companion</h2>
+
+    <ul class="feature-list">
+        <li data-section="hostels">Hostels</li>
+        <li data-section="bus">Bus Timings</li>
+        <li data-section="library">Library Hours</li>
+        <li data-section="faculty">Faculty List</li>
+        <li data-section="nearby-hospitals">Nearby Hospital & Clinics</li>
+        <li data-section="lost">Lost and Found</li>
+        <li data-section="ramadan">Ramadan Timings</li>
+    
+    </ul>
+    <div id="bus" class="content-section">
+        <h3>Bus Timings</h3>
+        <div id="bus-routes" style="text-align: center;">
+            <button data-route="college-alpy">College to Alappuzha</button>
+            <button data-route="alpy-college">Alappuzha to College</button>
+            <button data-route="jankar-chry">Pulinkunnu Jankar to Changanassery</button>
+            <button data-route="chry-jankar">Changanassery to Pulinkunnu Jankar</button>
+            <button data-route="jankar-alpy">Pulinkunnu Jankar to Alappuzha</button>
+            <button data-route="alpy-jankar">Alappuzha to Pulinkunnu Jankar</button>
+            <button data-route="college-chry">College to Changanassery</button>
+            <button data-route="chry-college">Changanassery to College</button>
+        </div>
+        <ul id="bus-timings" style="display: none; list-style-type: none; padding-left: 0;">
+        </ul>
+    </div>
+    
+    <style>
+        #bus-routes button {
+            background: linear-gradient(135deg, #424242, #303030);
+            margin: 10px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-size: 1em;
+            color: #b3e5fc;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+    
+        #bus-routes button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, #546e7a, #37474f);
+        }
+    </style>
+    
+    <script>
+        document.querySelectorAll('#bus-routes button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const route = event.target.dataset.route;
+                const timingsList = document.getElementById('bus-timings');
+                timingsList.innerHTML = '';
+                timingsList.style.display = 'block';
+    
+                let routeName = '';
+                let timings = [];
+    
+                switch (route) {
+                    case 'college-alpy':
+                        routeName = 'College to Alappuzha';
+                        timings = ['9:30 AM', '11:00 AM', '12:30 PM', '2:10 PM', '3:40 PM', '5:10 PM', '6:30 PM', '7:50 PM'];
+                        break;
+                    case 'alpy-college':
+                        routeName = 'Alappuzha to College';
+                        timings = ['8:00 AM', '9:30 AM', '11:00 AM', '12:30 PM', '2:10 PM', '3:40 PM', '5:10 PM', '6:30 PM', '7:20 PM'];
+                        break;
+                    case 'jankar-chry':
+                        routeName = 'Pulinkunnu Jankar to Changanassery';
+                        timings = ['6:50 AM', '8:05 AM', '8:30 AM', '9:05 AM', '9:40 AM', '10:10 AM', '11:20 AM', '12:20 PM', '1:30 PM', '2:40 PM', '3:30 PM', '4:20 PM', '5:10 PM', '6:10 PM', '6:50 PM', '8:30 PM'];
+                        break;
+                    case 'chry-jankar':
+                        routeName = 'Changanassery to Pulinkunnu Jankar';
+                        timings = ['5:40 AM', '7:10 AM', '7:40 AM', '8:20 AM', '8:50 AM', '9:20 AM', '10:30 AM', '11:30 AM', '12:40 PM', '1:50 PM', '2:40 PM', '3:30 PM', '4:20 PM', '5:25 PM', '6:00 PM', '7:40 PM'];
+                        break;
+                    case 'jankar-alpy':
+                        routeName = 'Pulinkunnu Jankar to Alappuzha';
+                        timings = ['5:30 AM', '7:00 AM', '7:30 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:30 AM', '12:30 PM', '1:40 PM', '2:10 PM', '3:10 PM', '4:40 PM', '5:10 PM', '6:20 PM', '7:15 PM'];
+                        break;
+                    case 'alpy-jankar':
+                        routeName = 'Alappuzha to Pulinkunnu Jankar';
+                        timings = ['5:30 AM', '6:00 AM', '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '9:00 AM', '11:20 AM', '12:20 AM', '3:10 PM', '3:40 PM', '5:20 PM', '6:15 PM', '7:20 PM', '7:45 PM'];
+                        break;
+                    case 'college-chry':
+                        routeName = 'College to Changanassery';
+                        timings = ['7:15 AM', '8:35 AM', '8:45 AM', '10:00 AM', '11:35 AM', '12:25 PM', '2:25 PM', '3:15 PM', '4:15 PM', '5:15 PM', '5:45 PM', '7:05 PM', '7:40 PM', '8:00 PM'];
+                        break;
+                    case 'chry-college':
+                        routeName = 'Changanassery to College';
+                        timings = ['6:00 AM', '7:15 AM', '7:30 AM', '8:50 AM', '10:20 AM', '11:10 AM', '1:10 PM', '2:05 PM', '3:10 PM', '4:00 PM', '4:15 PM', '4:30 PM', '6:15 PM', '6:30 PM', '7:00 PM'];
+                        break;
+                }
+    
+                const routeNameItem = document.createElement('li');
+                routeNameItem.textContent = Route: ${routeName};
+                timingsList.appendChild(routeNameItem);
+    
+                timings.forEach(time => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = time;
+                    timingsList.appendChild(listItem);
+                });
+            });
+        });
+    </script>
+    <div id="ramadan" class="content-section">
+        <h3>Ramadan Timings - March 2025</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Suhoor</th>
+                    <th>Iftar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>March 1, 2025</td><td>5:00 AM</td><td>6:30 PM</td></tr>
+                <tr><td>March 2, 2025</td><td>5:01 AM</td><td>6:31 PM</td></tr>
+                <tr><td>March 3, 2025</td><td>5:02 AM</td><td>6:32 PM</td></tr>
+                <tr><td>March 4, 2025</td><td>5:03 AM</td><td>6:33 PM</td></tr>
+                <tr><td>March 5, 2025</td><td>5:04 AM</td><td>6:34 PM</td></tr>
+                <tr><td>March 6, 2025</td><td>5:05 AM</td><td>6:35 PM</td></tr>
+                <tr><td>March 7, 2025</td><td>5:06 AM</td><td>6:36 PM</td></tr>
+                <tr><td>March 8, 2025</td><td>5:07 AM</td><td>6:37 PM</td></tr>
+                <tr><td>March 9, 2025</td><td>5:08 AM</td><td>6:38 PM</td></tr>
+                <tr><td>March 10, 2025</td><td>5:09 AM</td><td>6:39 PM</td></tr>
+                <tr><td>March 11, 2025</td><td>5:10 AM</td><td>6:40 PM</td></tr>
+                <tr><td>March 12, 2025</td><td>5:11 AM</td><td>6:41 PM</td></tr>
+                <tr><td>March 13, 2025</td><td>5:12 AM</td><td>6:42 PM</td></tr>
+                <tr><td>March 14, 2025</td><td>5:13 AM</td><td>6:43 PM</td></tr>
+                <tr><td>March 15, 2025</td><td>5:14 AM</td><td>6:44 PM</td></tr>
+                <tr><td>March 16, 2025</td><td>5:15 AM</td><td>6:45 PM</td></tr>
+                <tr><td>March 17, 2025</td><td>5:16 AM</td><td>6:46 PM</td></tr>
+                <tr><td>March 18, 2025</td><td>5:17 AM</td><td>6:47 PM</td></tr>
+                <tr><td>March 19, 2025</td><td>5:18 AM</td><td>6:48 PM</td></tr>
+                <tr><td>March 20, 2025</td><td>5:19 AM</td><td>6:49 PM</td></tr>
+                <tr><td>March 21, 2025</td><td>5:20 AM</td><td>6:50 PM</td></tr>
+                <tr><td>March 22, 2025</td><td>5:21 AM</td><td>6:51 PM</td></tr>
+                <tr><td>March 23, 2025</td><td>5:22 AM</td><td>6:52 PM</td></tr>
+                <tr><td>March 24, 2025</td><td>5:23 AM</td><td>6:53 PM</td></tr>
+                <tr><td>March 25, 2025</td><td>5:24 AM</td><td>6:54 PM</td></tr>
+                <tr><td>March 26, 2025</td><td>5:25 AM</td><td>6:55 PM</td></tr>
+                <tr><td>March 27, 2025</td><td>5:26 AM</td><td>6:56 PM</td></tr>
+                <tr><td>March 28, 2025</td><td>5:27 AM</td><td>6:57 PM</td></tr>
+                <tr><td>March 29, 2025</td><td>5:28 AM</td><td>6:58 PM</td></tr>
+                <tr><td>March 30, 2025</td><td>5:29 AM</td><td>6:59 PM</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="library" class="content-section">
+        <h3>Library Hours</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Monday - Friday</td><td>9:00 AM - 5:00 PM</td></tr>
+                <tr><td>Saturday</td><td>10:00 AM - 2:00 PM</td></tr>
+                <tr><td>Sunday</td><td>Closed</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="faculty" class="content-section">
+        <h3>Faculty List</h3>
+        <ul class="department-list">
+            <li data-department="CSE">COMPUTER SCIENCE & ENGINEERING</li>
+            <li data-department="CE">CIVIL ENGINEERING</li>
+            <li data-department="ECE">ELECTRONICS AND COMMUNICATION ENGINEERING</li>
+            <li data-department="EEE">ELECTRICAL & ELECTRONICS ENGINEERING</li>
+            <li data-department="IT">INFORMATION TECHNOLOGY</li>
+            <li data-department="ME">MECHANICAL ENGINEERING</li>
+            <li data-department="AS&H">APPLIED SCIENCE & HUMANITIES</li>
+            <li data-department="MCA">COMPUTER APPLICATIONS</li>
+        </ul>
+        <div id="faculty-details"></div>
+    </div>
+    
+    <style>
+    .department-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .department-list li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+    }
+    
+    .department-list li:hover {
+        background-color: #f0f0f0;
+    }
+    
+    #faculty-details {
+        margin-top: 20px;
+    }
+    </style>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... (rest of your existing JavaScript code) ...
+    
+        const departmentListItems = document.querySelectorAll('.department-list li');
+        const facultyDetailsDiv = document.getElementById('faculty-details');
+    
+        departmentListItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const department = this.getAttribute('data-department');
+                showFacultyDetails(department);
+            });
+        });
+    
+        function showFacultyDetails(department) {
+            let facultyList = '';
+    
+            // Replace with actual faculty data from the CUCEK website
+            switch (department) {
+    case 'CSE':
+        facultyList = '<h4>COMPUTER SCIENCE & ENGINEERING</h4><ul><li>Dr. Preetha Mathew (HOD) - 9446249706, preetha@cucek.ac.in</li><li>Bindu PK (CSE) - 9876543210, bindupk@cucek.ac.in</li><li>Manoj Kumar (CSE) - 8765432109, manojkumar@cucek.ac.in</li><li>Anitha Mary Chacko (CSE) - 7654321098, anithamary@cucek.ac.in</li><li>Alice Jacob (CSE) - 9123456780, alicejacob@cucek.ac.in</li></ul>';
+        break;
+    case 'CE':
+        facultyList = '<h4>CIVIL ENGINEERING</h4><ul><li>Dr. Sunil Kumar N (HOD) - 9447706426, sunilkumar@cucek.ac.in</li><li>Anu P.L (CE) - 8345678901, anupl@cucek.ac.in</li><li>Aswathy M.S (CE) - 7234567890, aswathyms@cucek.ac.in</li><li>Sreelakshmi S (CE) - 9012345678, sreelakshmis@cucek.ac.in</li><li>Saritha S (CE) - 8901234567, sarithas@cucek.ac.in</li></ul>';
+        break;
+    case 'ECE':
+        facultyList = '<h4>ELECTRONICS AND COMMUNICATION ENGINEERING</h4><ul><li>Dr. Manoj VJ (HOD) - 9447440260, manojvj@cucek.ac.in</li><li>Dr. Anil (ECE) - 7890123456, anil@cucek.ac.in</li><li>Nishanth r (ECE) - 9678901234, nishanthr@cucek.ac.in</li><li>Abin John (ECE) - 8567890123, abinjohn@cucek.ac.in</li><li>Aswathy R Nair (ECE) - 7456789012, aswathyrnair@cucek.ac.in</li></ul>';
+        break;
+    case 'EEE':
+        facultyList = '<h4>ELECTRICAL & ELECTRONICS ENGINEERING</h4><ul><li>Sajan Joseph (HOD) - 9447877333, sajan@cucek.ac.in</li><li>Anju P.S (EEE) - 9345678901, anjups@cucek.ac.in</li><li>Anu Joy (EEE) - 8234567890, anujjoy@cucek.ac.in</li><li>Nisha Mariam Jose (EEE) - 7123456789, nishamariam@cucek.ac.in</li><li>Aparna Sasidharan (EEE) - 9901234567, aparnas@cucek.ac.in</li></ul>';
+        break;
+    case 'IT':
+        facultyList = '<h4>INFORMATION TECHNOLOGY</h4><ul><li>Dr. Harikrishnan D (HOD) - 7496800632, harikrishnand@cucek.ac.in</li><li>Jisha V.J (IT) - 8890123456, jishavj@cucek.ac.in</li><li>Anuja P.V (IT) - 7789012345, anujapv@cucek.ac.in</li><li>Anju S (IT) - 9567890123, anjus@cucek.ac.in</li><li>Deepthi Das K (IT) - 8456789012, deepthidas@cucek.ac.in</li></ul>';
+        break;
+    case 'ME':
+        facultyList = '<h4>MECHANICAL ENGINEERING</h4><ul><li>Dr. Senthil Prakash (HOD) - 9496226791, senthilprakash@cucek.ac.in</li><li>Syam Kumar S (ME) - 7345678901, syamkumar@cucek.ac.in</li><li>Nithin Kumar K (ME) - 9234567890, nithinkumar@cucek.ac.in</li><li>Ranjith R (ME) - 8123456789, ranjithr@cucek.ac.in</li><li>Anandhu Krishna R (ME) - 7901234567, anandhukrishna@cucek.ac.in</li></ul>';
+        break;
+    case 'AS&H':
+        facultyList = '<h4>APPLIED SCIENCE & HUMANITIES</h4><ul><li>Dr. Asaletha R (HOD) - 9496720973, asalethar@cucek.ac.in</li><li>Dr. Biju P.L (AS&H) - 9789012345, bijupl@cucek.ac.in</li><li>Dr. Sreelatha K (AS&H) - 8678901234, sreelathak@cucek.ac.in</li><li>Dr. Smitha S.L (AS&H) - 7567890123, smithasl@cucek.ac.in</li><li>Dr. Manju K.P (AS&H) - 9456789012, manjukp@cucek.ac.in</li></ul>';
+        break;
+    case 'MCA':
+        facultyList = '<h4>COMPUTER APPLICATIONS</h4><ul><li>Deepa Nair (HOD) - 944710391, deepanair@cucek.ac.in</li><li>Jayasree M (MCA) - 8345678901, jayasreem@cucek.ac.in</li><li>Sreeja S (MCA) - 7234567890, sreejas@cucek.ac.in</li><li>Anju S (MCA) - 9123456789, anjus@cucek.ac.in</li><li>Anjana P (MCA) - 8901234567, anjanap@cucek.ac.in</li></ul>';
+        break;
+    default:
+        facultyList = '<p>No faculty details found.</p>';
+}
+    
+            facultyDetailsDiv.innerHTML = facultyList;
+        }
+    });
+    </script>
+
+<div id="nearby-hospitals" class="content-section">
+    <h3>Nearby Hospitals & Clinics</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact Number</th>
+                <th>Distance (km)</th>
+                <th>Ambulance Number</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Govt Hospital Pulincunnu</td>
+                <td>0477 2702355</td>
+                <td>(Very close - within Pulincunnu)</td>
+                <td>108 (Kerala Ambulance Service)</td>
+                <td>General Hospital</td>
+            </tr>
+            <tr>
+                <td>Primary Health Centre, Nedumudy</td>
+                <td>0477 272 3240</td>
+                <td>~ 8 km</td>
+                <td>108 (Kerala Ambulance Service)</td>
+                <td>Primary care, basic medical services</td>
+            </tr>
+            <tr>
+                <td>Lake Palace Backwater Resort - Ayurvedic Spa & Treatment</td>
+                <td>0477 270 2777</td>
+                <td>~ 3 km</td>
+                <td>(Contact Resort Directly)</td>
+                <td>Ayurvedic treatments, may have medical professionals</td>
+            </tr>
+             <tr>
+                <td>Mar Sleeva Medicity Cherpalcherry</td>
+                <td>0466 228 1000</td>
+                <td>~ 40 km</td>
+                <td>0466 228 1000 (Hospital Ambulance)</td>
+                <td>Multi-specialty hospital</td>
+            </tr>
+            <tr>
+              <td>Pushpagiri Medical College Hospital Thiruvalla</td>
+              <td>0469 270 0400</td>
+              <td>~ 35 km</td>
+              <td>0469 270 0400 (Hospital Ambulance)</td>
+              <td>Large multi-specialty hospital</td>
+            </tr>
+            <tr>
+                <td>Changanacherry Taluk Hospital</td>
+                <td>0481 242 0237</td>
+                <td>~ 20 km</td>
+                <td>108 (Kerala Ambulance Service)</td>
+                <td>Taluk-level general hospital</td>
+            </tr>
+            <tr>
+                <td>Alappuzha Medical College Hospital</td>
+                <td>0477 228 2600</td>
+                <td>~ 25 km</td>
+                <td>108 (Kerala Ambulance Service)</td>
+                <td>Major government medical college hospital</td>
+            </tr>
+            <tr>
+                <td>KVM Hospital Alappuzha</td>
+                <td>0477 225 8001</td>
+                <td>~ 26 km</td>
+                <td>0477 225 8001 (Hospital Ambulance)</td>
+                <td>Private multi-specialty hospital</td>
+            </tr>
+            <tr>
+                <td>Care Well Homoeo Clinic</td>
+                <td>94473 34975</td>
+                <td>~ 15 km</td>
+                <td>(Private Arrangement Needed)</td>
+                <td>Homoeopathic clinic</td>
+            </tr>
+            <tr>
+                <td>Dr. Anitha's Dental Clinic</td>
+                <td>99476 89333</td>
+                <td>~ 18 km</td>
+                <td>(Private Arrangement Needed)</td>
+                <td>Dental clinic</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="hostels" class="content-section">
+    <h3>Hostels at Pulinchunnu</h3>
+    <div id="hostel-types" style="text-align: center;">
+        <button data-type="boys">Boys Hostels</button>
+        <button data-type="girls">Girls Hostels</button>
+    </div>
+    <div id="hostel-list"></div>
+</div>
+
+<style>
+    #hostel-types button {
+        background: linear-gradient(135deg, #424242, #303030);
+        margin: 10px;
+        padding: 15px 25px;
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        font-size: 1em;
+        color: #b3e5fc;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    #hostel-types button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+        background: linear-gradient(135deg, #546e7a, #37474f);
+    }
+</style>
+
+<script>
+    document.querySelectorAll('#hostel-types button').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const type = event.target.dataset.type;
+            const hostelListDiv = document.getElementById('hostel-list');
+            let hostelList = '';
+
+            if (type === 'boys') {
+                hostelList = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hostel Name</th>
+                                <th>Owner Contact</th>
+                                <th>Total Capacity</th>
+                                <th>Available Seats</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sree Narayana Boys Hostel</td><td>9876543210</td><td>50</td><td>20</td></tr>
+                            <tr><td>Pulinchunnu Residency (Boys)</td><td>8765432109</td><td>60</td><td>15</td></tr>
+                            <tr><td>Krishna Bhavan Boys Hostel</td><td>7654321098</td><td>45</td><td>25</td></tr>
+                            <tr><td>Asoka Boys Hostel</td><td>9447123456</td><td>55</td><td>10</td></tr>
+                            <tr><td>Tharavadu Boys Hostel</td><td>8123456789</td><td>70</td><td>30</td></tr>
+                            <tr><td>Lakshmi Vilas Boys Hostel</td><td>7987654321</td><td>40</td><td>5</td></tr>
+                            <tr><td>Green View Boys Hostel</td><td>9012345678</td><td>65</td><td>35</td></tr>
+                            <tr><td>Peaceful Abode (Boys)</td><td>8234567890</td><td>50</td><td>18</td></tr>
+                            <tr><td>Sunrise Boys Hostel</td><td>7890123456</td><td>75</td><td>22</td></tr>
+                            <tr><td>Hilltop Boys Hostel</td><td>9988776655</td><td>60</td><td>28</td></tr>
+                        </tbody>
+                    </table>
+                `;
+            } else if (type === 'girls') {
+                hostelList = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hostel Name</th>
+                                <th>Owner Contact</th>
+                                <th>Total Capacity</th>
+                                <th>Available Seats</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sree Devi Girls Hostel</td><td>9876543210</td><td>40</td><td>10</td></tr>
+                            <tr><td>Pulinchunnu Residency (Girls)</td><td>8765432109</td><td>50</td><td>25</td></tr>
+                            <tr><td>Gowri Bhavan Girls Hostel</td><td>7654321098</td><td>35</td><td>15</td></tr>
+                            <tr><td>Anjali Girls Hostel</td><td>9447123456</td><td>45</td><td>20</td></tr>
+                            <tr><td>Nandanam Girls Hostel</td><td>8123456789</td><td>60</td><td>30</td></tr>
+                            <tr><td>Matha Girls Hostel</td><td>7987654321</td><td>30</td><td>5</td></tr>
+                            <tr><td>Green View Girls Hostel</td><td>9012345678</td><td>55</td><td>35</td></tr>
+                            <tr><td>Peaceful Abode (Girls)</td><td>8234567890</td><td>40</td><td>18</td></tr>
+                            <tr><td>Sunrise Girls Hostel</td><td>7890123456</td><td>65</td><td>22</td></tr>
+                            <tr><td>Hilltop Girls Hostel</td><td>9988776655</td><td>50</td><td>28</td></tr>
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            hostelListDiv.innerHTML = hostelList;
+        });
+    });
+</script>
+
+<div id="lost" class="content-section">
+    <h3>Lost and Found</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Found By</th>
+                <th>Contact Number</th>
+                <th>Contact Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Wallet</td>
+                <td>Brown leather wallet with ID</td>
+                <td>Aravind Nair</td>
+                <td>9876543210</td>
+                <td>nair@gmail.com</td>
+            </tr>
+            <tr>
+                <td>Keys</td>
+                <td>Set of house keys</td>
+                <td>Meera Menon</td>
+                <td>8765432109</td>
+                <td>meera@gmail.com</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>Black Samsung Galaxy S21</td>
+              <td>Rahul Krishna</td>
+              <td>9988776655</td>
+              <td>rahul@gmail.com</td>
+            </tr>
+            <tr>
+              <td>Laptop</td>
+              <td>Silver Dell XPS 13</td>
+              <td>Anjali Nair</td>
+              <td>8899001122</td>
+              <td>anjali@gmail.com</td>
+            </tr>
+            <tr>
+              <td>ID Card</td>
+              <td>CUSAT Student ID Card</td>
+              <td>Suresh Kumar</td>
+              <td>7766554433</td>
+              <td>suresh@gmail.com</td>
+            </tr>
+            <tr>
+              <td>Umbrella</td>
+              <td>Blue foldable umbrella</td>
+              <td>Divya Menon</td>
+              <td>6655443322</td>
+              <td>divya@gmail.com</td>
+            </tr>
+            <tr>
+              <td>Notebook</td>
+              <td>Red spiral notebook</td>
+              <td>Gokul Raj</td>
+              <td>5544332211</td>
+              <td>gokul@gmail.com</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>If you have lost or found any item, please contact the admin:</p>
+    <p>Admin Name: C P M Ashir</p>
+    <p>Contact Number: 9447364175</p>
+    <p>Email: ashir@cucek.ac.in</p>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
